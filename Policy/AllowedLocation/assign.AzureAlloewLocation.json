@@ -1,0 +1,34 @@
+{
+    "sku": {
+     "name": "A0",
+     "tier": "Free"
+    },
+    "properties": {
+     "displayName": "Azure Cosmos DB allowed locations",
+     "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/0473574d-2d43-4217-aefe-941fcdf7e684",
+     "scope": "/subscriptions/973befb1-3db1-46ad-8c39-697ac39bc53c",
+     "notScopes": [],
+     "parameters": {
+      "listOfAllowedLocations": {
+       "value": [
+        "westeurope",
+        "northeurope"
+       ]
+      }
+     },
+     "metadata": {
+      "assignedBy": "Federico Maestà",
+      "parameterScopes": {
+       "listOfAllowedLocations": "/subscriptions/973befb1-3db1-46ad-8c39-697ac39bc53c"
+      },
+      "createdBy": "7f8c076a-c0d9-4be3-b102-af74e3906d3f",
+      "createdOn": "2021-02-06T14:08:32.7675921Z",
+      "updatedBy": null,
+      "updatedOn": null
+     },
+     "enforcementMode": "Default"
+    },
+    "id": "/subscriptions/973befb1-3db1-46ad-8c39-697ac39bc53c/providers/Microsoft.Authorization/policyAssignments/f45e501fb3e347589b1012f2",
+    "type": "Microsoft.Authorization/policyAssignments",
+    "name": "f45e501fb3e347589b1012f2"
+   }

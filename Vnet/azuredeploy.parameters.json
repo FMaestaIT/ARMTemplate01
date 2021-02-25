@@ -1,0 +1,40 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetName": {
+            "value" : "vnet-shared-prod-we-001"        
+        },
+        "vnetAddressPrefix":{
+            "Value": "10.32.0.0/20"
+        },
+        "subnet1Prefix": {
+            "Value": "10.32.1.0/24"
+        },
+        "subnet1Name": {
+            "Value": "snet-shared-private-we-001"
+        },
+        "subnet2Prefix": {
+            "Value": "10.32.15.0/24"
+        },
+        "subnet2Name": {
+            "Value": "snet-shared-public-we-001"
+        },
+        "location": {
+            "Value": "West Europe"
+        },
+        "securitygroupNamePrivate": {
+            "Value": "nsg-sharedprivate-we-001"
+        },
+        "securitygroupNamePublic": {
+            "Value": "nsg-sharedpublic-we-001"
+        },
+        "Tags": {
+            "Value": {
+                "Environment": "Prod",
+                "Application": "Infra",
+                "Location": "WestEurope"
+            }
+        }
+    }
+}
