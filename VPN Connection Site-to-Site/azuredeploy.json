@@ -48,11 +48,11 @@
     },
     "gatewaySku": {
       "type": "string",
-      "defaultValue": "Basic",
+      "defaultValue": "VpnGw1",
       "allowedValues": [
-        "Basic",
-        "Standard",
-        "HighPerformance"
+        "VpnGw1",
+        "VpnGw2",
+        "VpnGw3"
       ],
       "metadata": {
         "description": "The Sku of the Gateway. This must be one of Basic, Standard or HighPerformance."
@@ -60,7 +60,7 @@
     },
     "connectionName": {
       "type": "string",
-      "defaultValue": "Azure2Other",
+      "defaultValue": "VPN Site-to-Site Comune AQ",
       "metadata": {
         "description": "Arbitrary name for the new connection between Azure VNet and other network"
       }
