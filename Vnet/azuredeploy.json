@@ -42,6 +42,20 @@
         "description": "Subnet 2 Name"
       }
     },
+    "subnetGateway": {
+      "type": "string",
+      "defaultValue": "GatewaySubnet",
+      "metadata": {
+        "description": "GatewaySubnet Name"
+      }
+    },
+    "subnetGatewayName": {
+      "type": "string",
+      "defaultValue": "10.0.1.0/24",
+      "metadata": {
+        "description": "Gateway Subnet Prefix"
+      }
+    },
     "location": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
