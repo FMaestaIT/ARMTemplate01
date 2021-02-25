@@ -42,14 +42,14 @@
         "description": "Subnet 2 Name"
       }
     },
-    "subnetGateway": {
+    "subnetGatewayName": {
       "type": "string",
       "defaultValue": "GatewaySubnet",
       "metadata": {
         "description": "GatewaySubnet Name"
       }
     },
-    "subnetGatewayName": {
+    "subnetGatewayPrefix": {
       "type": "string",
       "defaultValue": "10.0.1.0/24",
       "metadata": {
@@ -112,6 +112,18 @@
           ],
           "properties": {
             "addressPrefix": "[parameters('subnet2Prefix')]"
+          }
+        },
+        {
+          "type": "subnets",
+          "apiVersion": "2020-05-01",
+          "location": "[parameters('location')]",
+          "name": "[parameters('subnetGatewayName')]",
+          "dependsOn": [
+            "[parameters('vnetName')]"
+          ],
+          "properties": {
+            "addressPrefix": "[parameters('subnetGatewayPrefix')]"
           }
         }
       ]
