@@ -15,10 +15,16 @@
             "Value": "snet-shared-private-we-001"
         },
         "subnet2Prefix": {
-            "Value": "10.32.15.0/24"
+            "Value": "10.32.14.0/24"
         },
         "subnet2Name": {
             "Value": "snet-shared-public-we-001"
+        },
+        "subnetGatewayPrefix": {
+            "Value": "10.32.15.224/27"
+        },
+        "subnetGatewayName": {
+            "Value": "GatewaySubnet"
         },
         "location": {
             "Value": "West Europe"
