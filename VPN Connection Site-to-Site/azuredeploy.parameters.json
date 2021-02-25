@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "localGatewayName": {
+        "value": "locgw-shared-prod-we-001"
+      },
+      "localGatewayIpAddress": {
+        "value": "31.27.21.48"
+      },
+      "localAddressPrefix": {
+        "value": "172.16.0.0/12"
+      },
+      "virtualNetworkName": {
+        "value": "vnet-shared-prod-we-001"
+      },
+      "sharedKey": {
+        "value": "fmwfowngonewognwenignowrngnewrngowingwgnmpwng"
+      }
+    }
+  }
