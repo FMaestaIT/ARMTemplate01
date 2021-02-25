@@ -147,7 +147,7 @@
       "name": "[parameters('gatewayName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('gatewayPublicIPName'))]",
+        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('gatewayPublicIPName'))]"
         //"[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]"
       ],
       "properties": {
