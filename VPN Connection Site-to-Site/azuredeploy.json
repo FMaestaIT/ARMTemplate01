@@ -60,7 +60,7 @@
     },
     "connectionName": {
       "type": "string",
-      "defaultValue": "VPN Site-to-Site Comune AQ",
+      "defaultValue": "VPNConnection",
       "metadata": {
         "description": "Arbitrary name for the new connection between Azure VNet and other network"
       }

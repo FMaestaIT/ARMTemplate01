@@ -2,20 +2,29 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "localGatewayName": {
-        "value": "locgw-shared-prod-we-001"
+      "gatewayName":{
+        "value": "vgw-shared-prod-we-001"
       },
-      "localGatewayIpAddress": {
+      "localGatewayName":{
+        "value": "lgw-shared-prod-we-001"
+      },
+      "localGatewayIpAddress":{
         "value": "31.27.21.48"
       },
-      "localAddressPrefix": {
+      "localAddressPrefix":{
         "value": "172.16.0.0/12"
       },
-      "virtualNetworkName": {
+      "virtualNetworkName":{
         "value": "vnet-shared-prod-we-001"
       },
       "sharedKey": {
-        "value": "fmwfowngonewognwenignowrngnewrngowingwgnmpwng"
+        "value": "YsrT9D6mJAT%?YDnpyu6f!%dyVVg&Ge?"
+      },
+      "connectionName":{
+        "value": "cn-lgw-shared-prod-we-001-to-vgw-shared-prod-we-001"
+      },
+      "gatewayPublicIPName":{
+        "value": "pip-vgw-prod-we-001"
       }
     }
   }
