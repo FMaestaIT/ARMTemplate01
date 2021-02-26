@@ -39,10 +39,10 @@
             "value": "snet-shared-private-we-001"
         },
         "adOSDiskSize": {
-            "value": "64"
+            "value": 64
         },
         "adDataDiskSize": {
-            "value": "128"
+            "value": 128
         }
     }
 }
