@@ -57,10 +57,10 @@
             "type": "string"
         },
         "adOSDiskSize": {
-            "type": "string"
+            "type": "int"
         },
         "adDataDiskSize": {
-            "type": "string"
+            "type": "int"
         },
         "location": {
             "type": "string",
