@@ -1,0 +1,254 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminUsername": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the Administrator of the new VM and Domain"
+            }
+        },
+        "adminPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "The password for the Administrator account of the new VM and Domain"
+            }
+        },
+        "adVMSize": {
+            "type": "string",
+            "defaultValue": "Standard_DS2_v2",
+            "metadata": {
+                "description": "Size for the VM.  This sample uses premium disk and requires an 'S' sku."
+            }
+        },
+        "storageAccountType": {
+            "type": "string"
+        },
+        "adPDCVMName": {
+            "type": "string"
+        },
+        "adBDCVMName": {
+            "type": "string"
+        },
+        "imagePublisher": {
+            "type": "string",
+            "defaultValue": "MicrosoftWindowsServer"
+        },
+        "imageOffer": {
+            "type": "string",
+            "defaultValue": "WindowsServer"
+        },
+        "imageSKU": {
+            "type": "string"
+        },
+        "adAvailabilitySetName": {
+            "type": "string"
+        },
+        "adPDCNicIPAddress": {
+            "type": "string"
+        },
+        "adBDCNicIPAddress": {
+            "type": "string"
+        },
+        "virtualNetworkName": {
+            "type": "string"
+        },
+        "adSubnetName": {
+            "type": "string"
+        },
+        "adOSDiskSize": {
+            "type": "string"
+        },
+        "adDataDiskSize": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+                "description": "Location for all resources."
+            }
+        }
+    },
+    "variables": {
+        
+        
+        "adPDCNicName": "[concat('nic-01',parameters('adPDCVMName'),'prod-001')]",
+        "adBDCNicName": "[concat('nic-01',parameters('adBDCVMName'),'prod-001')]",
+        "adSubnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('adSubnetName'))]"
+        
+    },
+    "resources": [
+        {
+            "apiVersion": "2019-12-01",
+            "type": "Microsoft.Compute/availabilitySets",
+            "location": "[parameters('location')]",
+            "name": "[parameters('adAvailabilitySetName')]",
+            "properties": {
+                "PlatformUpdateDomainCount": 20,
+                "PlatformFaultDomainCount": 2
+            },
+            "sku": {
+                "name": "Aligned"
+            }
+        },
+        {
+            "name": "[variables('adPDCNicName')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-03-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[parameters('adPDCNicIPAddress')]",
+                            "subnet": {
+                                "id": "[variables('adSubnetRef')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "[variables('adBDCNicName')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2020-03-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "[parameters('adBDCNicIPAddress')]",
+                            "subnet": {
+                                "id": "[variables('adSubnetRef')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "[parameters('adPDCVMName')]",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2019-12-01",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('adPDCNicName'))]",
+                "[resourceId('Microsoft.Compute/availabilitySets', parameters('adAvailabilitySetName'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('adVMSize')]"
+                },
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('adAvailabilitySetName'))]"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('adPDCVMName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "[parameters('imagePublisher')]",
+                        "offer": "[parameters('imageOffer')]",
+                        "sku": "[parameters('imageSKU')]",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "[concat(parameters('adPDCVMName'),'_OSDisk')]",
+                        "caching": "ReadWrite",
+                        "createOption": "FromImage",
+                        "size": "[parameters('adOSDiskSize')]",
+                        "managedDisk": {
+                            "storageAccountType": "[parameters('storageAccountType')]"
+                        }
+                    },
+                    "dataDisks": [
+                        {
+                            "name": "[concat(parameters('adPDCVMName'),'_data-disk1')]",
+                            "caching": "None",
+                            "diskSizeGB": "[parameters('adDataDiskSize')]",
+                            "lun": 0,
+                            "createOption": "Empty",
+                            "managedDisk": {
+                                "storageAccountType": "[parameters('storageAccountType')]"
+                            }
+                        }
+                    ]
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('adPDCNicName'))]"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "[parameters('adBDCVMName')]",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2019-12-01",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('adBDCNicName'))]",
+                "[resourceId('Microsoft.Compute/availabilitySets', parameters('adAvailabilitySetName'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('adVMSize')]"
+                },
+                "availabilitySet": {
+                    "id": "[resourceId('Microsoft.Compute/availabilitySets', parameters('adAvailabilitySetName'))]"
+                },
+                "osProfile": {
+                    "computerName": "[parameters('adBDCVMName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "[parameters('imagePublisher')]",
+                        "offer": "[parameters('imageOffer')]",
+                        "sku": "[parameters('imageSKU')]",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "name": "[concat(parameters('adBDCVMName'),'_osdisk')]",
+                        "caching": "ReadWrite",
+                        "createOption": "FromImage",
+                        "size": "[parameters('adOSDiskSize')]",
+                        "managedDisk": {
+                            "storageAccountType": "[parameters('storageAccountType')]"
+                        }
+                    },
+                    "dataDisks": [
+                        {
+                            "name": "[concat(parameters('adBDCVMName'),'_data-disk1')]",
+                            "caching": "None",
+                            "diskSizeGB": "[parameters('adDataDiskSize')]",
+                            "lun": 0,
+                            "createOption": "Empty",
+                            "managedDisk": {
+                                "storageAccountType": "[parameters('storageAccountType')]"
+                            }
+                        }
+                    ]
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('adBDCNicName'))]"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminUsername": {
+            "value": "GEN-UNIQUE"
+        },
+        "adminPassword": {
+            "value": "GEN-PASSWORD"
+        },
+        "storageAccountType": {
+            "value": "Standard_SSD"
+        },
+        "adPDCVMName": {
+            "value": "vmdc001"
+        },
+        "adBDCVMName": {
+            "value": "vmdc002"
+        },
+        "adPDCNicIPAddress": {
+            "value": "10.32.1.225"
+        },
+        "adBDCNicIPAddress": {
+            "value": "10.32.1.226"
+        },
+        "imagePublisher": {
+            "value": "MicrosoftWindowsServer"
+        }, 
+        "imageSKU": {
+            "value": "2016-Datacenter"
+        },
+        "adAvailabilitySetName": {
+            "value": "avail-addc-prod-we-001"
+        },
+        "virtualNetworkName": {
+            "value": "vnet-shared-prod-we-001"
+        },
+        "adSubnetName": {
+            "value": "snet-shared-private-we-001"
+        },
+        "adOSDiskSize": {
+            "value": "64"
+        },
+        "adDataDiskSize": {
+            "value": "128"
+        }
+    }
+}

@@ -27,14 +27,13 @@
       }
     },
     "localAddressPrefix": {
-      "type": "string",
+      "type": "array",
       "metadata": {
         "description": "CIDR block representing the address space of your local/on-prem network's Subnet"
       }
     },
     "gatewayPublicIPName": {
       "type": "string",
-      "defaultValue": "azureGatewayIP",
       "metadata": {
         "description": "Arbitrary name for public IP resource used for the new azure gateway"
       }
