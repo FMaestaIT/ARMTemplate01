@@ -164,7 +164,7 @@
                         "name": "[concat(parameters('adPDCVMName'),'_OSDisk')]",
                         "caching": "ReadWrite",
                         "createOption": "FromImage",
-                        "size": "[parameters('adOSDiskSize')]",
+                        "diskSizeGB": "[parameters('adOSDiskSize')]",
                         "managedDisk": {
                             "storageAccountType": "[parameters('storageAccountType')]"
                         }
@@ -223,7 +223,7 @@
                         "name": "[concat(parameters('adBDCVMName'),'_osdisk')]",
                         "caching": "ReadWrite",
                         "createOption": "FromImage",
-                        "size": "[parameters('adOSDiskSize')]",
+                        "diskSizeGB": "[parameters('adOSDiskSize')]",
                         "managedDisk": {
                             "storageAccountType": "[parameters('storageAccountType')]"
                         }

@@ -9,7 +9,7 @@
             "value": "GEN-PASSWORD"
         },
         "storageAccountType": {
-            "value": "Standard_SSD"
+            "value": "StandardSSD_LRS"
         },
         "adPDCVMName": {
             "value": "vmdc001"
